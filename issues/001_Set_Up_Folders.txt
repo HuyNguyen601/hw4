@@ -1,0 +1,3 @@
+Set up folder structure
+Copy the code to index.php
+Git folder
