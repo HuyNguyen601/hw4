@@ -1,0 +1,1 @@
+Work with layout and view for landing, edit, read pages.

@@ -1,0 +1,2 @@
+Install monolog
+Put autoloading in composer.json
