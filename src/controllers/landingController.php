@@ -1,9 +1,14 @@
 <?php
-namespace hw4\controller;
+namespace hw4\controllers;
 
-class Controller {
+use hw4\views\layout;
 
-	public function landingController()
+class landingController {
+
+	public function __construct()
 	{
-		var $controller = new landingController();
+		//$layout = (isset($_REQUEST['f']) && in_array($_REQUEST['f'], [
+		//"html"])) ? $_REQUEST['f'] . "Layout" : "htmlLayout";
+		$l = new layout('landingView');
 	}
+}

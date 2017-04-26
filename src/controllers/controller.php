@@ -1,9 +1,15 @@
 <?php
-namespace hw4\controller;
+namespace hw4\controllers;
 
-class Controller {
+class controller {
+
+	public function __construct()
+	{
+		$c = new landingController();
+	}
 
 	public function landingController()
 	{
-		var $controller = new landingController();
+		$c = new landingController();
 	}
+}

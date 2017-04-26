@@ -1,8 +1,17 @@
 <?php
-namespace hw4;
 require __DIR__ . '/vendor/autoload.php';
 
-$activity = (isset($_REQUEST['c']) && in_array($_REQUEST['c'], [
-    "landing", "newNote", "newList", "display"])) ? $_REQUEST['c'] . "Controller" : "landingController";
-$c = new Controller();
-$c->$activity();
+use hw4\controllers\editController;
+use hw4\controllers\readController;
+use hw4\controllers\landingController;
+
+if (isset($_REQUEST['c']))
+{
+	if($_REQUEST['c'] == 'edit')
+		$c = new editController();
+	else
+		$c = new readController();
+}
+else
+	$c = new landingController();
+
