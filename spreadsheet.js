@@ -1,4 +1,3 @@
-<script>
 /**
  * Defines a class for drawing and editing spreadsheets within a tag with
  *
@@ -310,4 +309,3 @@ function Spreadsheet(spreadsheet_id, supplied_data)
         container.addEventListener("click", self.updateCell, true);
     }
 }
-</script>
