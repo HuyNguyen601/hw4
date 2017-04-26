@@ -1,8 +1,5 @@
 <?php
-
-namespace hw4\configs
-
-using hw4\configs\config;
+require_once 'config.php';
 
 $info = new config();
 $conn = new mysqli($info->host,$info->user,$info->pass);
@@ -18,14 +15,16 @@ if ($conn->query($create) === TRUE) {
 	}
 $conn->select_db("homework4");
 $sheet= "CREATE TABLE SHEET (
-	sheet_id int IDENTITY(1,1) PRIMARY KEY,
+	sheet_id INT NOT NULL AUTO_INCREMENT,
 	sheet_name VARCHAR(50),
-	sheet_data VARCHAR(50)
+	sheet_data VARCHAR(50),
+	PRIMARY KEY(sheet_id)
 	);";
 $code ="CREATE TABLE SHEET_CODES (
-	sheet_id int IDENTITY(1,1) PRIMARY KEY,
+	sheet_id INT NOT NULL AUTO_INCREMENT,
 	hash_code VARCHAR(8),
-	code_type VARCHAR(8)
+	code_type VARCHAR(8),
+	PRIMARY KEY(sheet_id)
 	);";
 if ($conn->query($sheet) === TRUE) { 
 	echo "Sheet table created successfully\n";
