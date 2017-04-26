@@ -3,10 +3,10 @@ namespace hw4\controllers;
 
 use hw4\views\layout;
 
-class landingController {
+class editController {
 
 	public function __construct()
 	{
-		$l = new layout('landingView');
+		$l = new layout('editView');
 	}
 }
