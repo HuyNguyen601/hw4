@@ -1,5 +1,5 @@
 <?php
-
+namespace hw4\configs
 class config {
 	public $host;
 	public $user;
