@@ -10,7 +10,7 @@ class landingView {
     	<body>
 		<form action ="index.php?c=edit" method ="post">
 		<input id="name" name="name" type="text" placeholder="New sheet name or code">
-		<input id="go" name="go" type="submit" value="Go" onclick=check()>
+		<input id="go" type="submit" onclick=check() value="Go">
 		</form>
 		<script>
 		function check()
