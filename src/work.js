@@ -70,3 +70,16 @@ function deleteRow(row)
         table.rows[j].cells[0].innerHTML =minus+j.toString().bold()+plus;
     }
 }
+
+            /* <table id="table" border=1>
+                <tr id ="1st row">
+                    <th></th>
+                    <th style="min-width:1in;text-align:right;">A<button onclick=addCol()>+</button></th>
+                </tr>
+                <tr id = "2nd row">
+                    <th style=" min-width:1.1in;text-align:right;">1<button onclick=addRow()>+</button></th>
+                    <td></td>
+                </tr>
+
+            </table>
+            */
