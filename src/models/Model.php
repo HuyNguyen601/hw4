@@ -1,17 +1,17 @@
 <?php
-namespace Logan\hw3;
-require_once dirname(__FILE__).'/configs/config.php';
+namespace hw4\models;
+
 
 class Model{
 
-	public function addList($name, $parent)
+	public function addSheet($name, $data)
 	{
-		$info = new config();
+		$info = new hw4\configs\config();
 		$add = new \mysqli($info->host,$info->user,$info->pass,$info->db);
 		if($add->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 			}
-		$query = "INSERT INTO list VALUES ('$name', '$parent');";
+		$query = "INSERT INTO sheet (sheet_name,sheet_data) ('$name', '$data');";
 		$add->query($query);
 		$add->close();
 	}
