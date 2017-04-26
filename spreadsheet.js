@@ -257,8 +257,13 @@ function Spreadsheet(spreadsheet_id, supplied_data)
             if (new_value != null) {
                 data[row][column] = new_value;
                 data_elt = document.getElementById(self.data_id);
+                //data_elt.classList.add('highlighted');
                 data_elt.value = JSON.stringify(data);
                 event.target.innerHTML = new_value;
+                var request = new XMLHttpRequest();
+                request.open("POST","index.php?c=api",true);
+                request.setRequestHeader("Content-type", "application/json");
+                request.send(data_elt.value);
             }
         } else if (type == 'add' && row == -1 && column >= 0) {
             for (var i = 0; i < length; i++) {

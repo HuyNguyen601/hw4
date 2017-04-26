@@ -1,0 +1,10 @@
+
+<style>
+	.highlighted {
+    	border: 2px solid blue;
+	}
+
+	.highlightedPrev {
+		border-right:2px solid blue;
+	}
+</style>
