@@ -259,6 +259,17 @@ function Spreadsheet(spreadsheet_id, supplied_data)
                 data_elt = document.getElementById(self.data_id);
                 data_elt.value = JSON.stringify(data);
                 event.target.innerHTML = new_value;
+				request = new XMLHttpRequest();
+				request.onreadystatechange = function()
+				{
+					switch(request.readyState) {
+						case 4:
+							alert("Database is updated.");
+						break;
+					}
+				}
+				request.open("GET", "index.php", true);
+				request.send(data_elt.value);
             }
         } else if (type == 'add' && row == -1 && column >= 0) {
             for (var i = 0; i < length; i++) {

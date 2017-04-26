@@ -1,6 +1,5 @@
 <?php
-
-
+require_once 'config.php';
 $info = new hw4\configs\config();
 $conn = new mysqli($info->host,$info->user,$info->pass);
 if($conn->connect_error) {
