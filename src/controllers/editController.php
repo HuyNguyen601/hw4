@@ -8,5 +8,6 @@ class editController {
 	public function __construct()
 	{
 		$l = new layout('editView');
+		
 	}
 }

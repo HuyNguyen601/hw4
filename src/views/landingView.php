@@ -5,7 +5,10 @@ class landingView {
 
 	public function __construct(){
 		?>
-		<form method ="post">
+		</h1>
+		</head>
+    	<body>
+		<form action ="index.php?c=edit" method ="post">
 		<input id="name" name="name" type="text" placeholder="New sheet name or code">
 		<input id="go" name="go" type="submit" value="Go" onclick=check()>
 		</form>
@@ -23,6 +26,7 @@ class landingView {
 			}
 		}
 		</script>
+		</body>
 		<?php
 	}
 }

@@ -13,17 +13,13 @@ public function __construct($view){
 	<!DOCTYPE html>
 	<html>
     	<head><title>Homework 4</title>
-			<h1><a href = "index.php"> Web Sheets</a></h1>
-		</head>
-    	<body>
-    	<?php
+			<h1><a href = "index.php"> Web Sheets</a><?php
 			if ($view == 'landingView')
 				$v = new landingView();
 			else if ($view == 'editView')
 				$v = new editView();
 			else $v = new readView();
     	?>
-    	</body>
 	</html><?php
 	}
 }
