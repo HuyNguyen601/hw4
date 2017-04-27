@@ -15,15 +15,15 @@ if ($conn->query($create) === TRUE) {
 $conn->select_db("homework4");
 $sheet= "CREATE TABLE SHEET (
 	sheet_id INT NOT NULL AUTO_INCREMENT,
-	sheet_name VARCHAR(50),
+	sheet_name VARCHAR(50) NOT NULL,
 	sheet_data TEXT,
 	PRIMARY KEY(sheet_id)
 	);";
 $code ="CREATE TABLE SHEET_CODES (
-	sheet_id INT NOT NULL AUTO_INCREMENT,
-	hash_code VARCHAR(8),
-	code_type VARCHAR(8),
-	PRIMARY KEY(sheet_id)
+	sheet_id INT NOT NULL,
+	hash_code VARCHAR(8) NOT NULL,
+	code_type VARCHAR(8) NOT NULL,
+	PRIMARY KEY(hash_code)
 	);";
 if ($conn->query($sheet) === TRUE) { 
 	echo "Sheet table created successfully\n";

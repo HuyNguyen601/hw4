@@ -9,11 +9,10 @@ class editView {
         <link rel="stylesheet" type="text/css" href="src/styles/style.css">
 		</head>
     	<body>
-    		Edit Url: <br>
-    		Read Url: <br>
-    		File Url: <br>
+    		Edit Url:<a href="index.php?name=<?=$obj['hash_edit']?>"> index.php?name=<?=$obj['hash_edit']?></a> <br>
+    		Read Url:<a href="index.php?name=<?=$obj['hash_read']?>"> index.php?name=<?=$obj['hash_read']?></a> <br>
+    		File Url:<a href="index.php?name=<?=$obj['hash_file']?>"> index.php?name=<?=$obj['hash_file']?></a>  <br>
             <div id="edit"></div>
-			<div id="test"></div>
     	</body>
         <script type="text/javascript" src="spreadsheet.js"></script>
         <script>

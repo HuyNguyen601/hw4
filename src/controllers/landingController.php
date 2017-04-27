@@ -12,7 +12,9 @@ class landingController {
 		$l = new layout('landingView','','');
 		if(isset($_POST['name']))
 			$name = $_POST['name'];
-		if(isset($_POST['go']))
+		else if(isset($_GET['name']))
+			$name = $_GET['name'];
+		if(isset($name))
 		{
 			$model = new Model();
 			$result = $model->getSheet($name);
@@ -26,9 +28,9 @@ class landingController {
 					$check = 1; //1 name is existed
 				}
 			}
-			if ($check!==1) // check $name is hash code
+			if ($check != 1) // check $name is hash code
 			{
-				$result = $model->getCode($name);
+				$result = $model->getNameAndCode($name);
 				foreach ($result as $row)
 				{
 					$type = $row['code_type'];
@@ -40,11 +42,11 @@ class landingController {
 						$check = 2; //2 name is hash code
 					}
 				}
-			}
-			else // new name for spreadsheet
-			{
-				$url = "index.php?c=edit&newName=$name";
-				header("Location: $url");
+				if($check == 0)// new name for spreadsheet
+				{
+					$url = "index.php?c=edit&newName=$name";
+					header("Location: $url");
+				}
 			}
 		}
 	}
