@@ -9,7 +9,7 @@ class landingController {
 	public function __construct()
 	{
 		$check = 0;
-		$l = new layout('landingView','','');
+		$l = new layout('landingView','');
 		if(isset($_POST['name']))
 			$name = $_POST['name'];
 		else if(isset($_GET['name']))
@@ -37,7 +37,7 @@ class landingController {
 					if($type==='edit' || $type==='read' || $type==='file')
 					{
 						$sheet_name = $row['sheet_name'];
-						$url = "index.php?c=$type&code=$name&name=$sheet_name";
+						$url = "index.php?c=$type&code=$name";
 						header("Location: $url");
 						$check = 2; //2 name is hash code
 					}

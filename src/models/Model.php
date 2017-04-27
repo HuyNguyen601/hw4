@@ -109,4 +109,27 @@ class Model{
 		return $result;
 	}
 
+	//get name, file hash code, and data for read controller, $code as input
+	public function readModel($code)
+	{
+		$info = new \hw4\configs\config();
+		$get = new \mysqli($info->host,$info->user,$info->pass,$info->db);
+		if($get->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+			}
+		$query = "	SELECT sheet_name,sheet_data,hash_code
+					FROM sheet,sheet_codes
+					WHERE sheet.sheet_id = 
+						(SELECT sheet_id 
+						FROM sheet_codes
+						WHERE hash_code LIKE '$name')
+					AND code_type = 'file';";
+
+		$result = $get->query($query);
+		echo $get->error;
+		$get->close();
+		return $result;
+
+	}
+
 }

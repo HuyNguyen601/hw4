@@ -39,9 +39,12 @@ class editController {
 		else if(isset($_GET['name']))
 		{
 			$obj['name'] = $_GET['name'];
-			if(isset($_GET['data']))
-				$obj['data'] = $_GET['data'];
 			$model = new Model();
+			$results = $model->getSheet($obj['name']);
+			foreach($results as $row)
+			{
+				$obj['data'] = $row['sheet_data'];
+			}
 			$results = $model->getCodes($obj['name']);
 			foreach($results as $row)
 			{
@@ -53,6 +56,28 @@ class editController {
 					$obj['hash_file'] = $row['hash_code'];
 			}
 		}
+		else if(isset($_GET['code']))
+		{
+			$obj['hash_edit'] = $_GET['code'];
+			$model = new Model();
+			$results = $model->readModel($obj['hash_edit']);
+			foreach($results as $row)
+			{
+				$obj['data'] = $row['sheet_data'];
+				$obj['name'] = $row['sheet_name'];
+			}
+			$results = $model->getCodes($obj['name']);
+			foreach($results as $row)
+			{
+				if($row['code_type'] === 'edit')
+					$obj['hash_edit'] = $row['hash_code'];
+				elseif($row['code_type'] === 'read')
+					$obj['hash_read'] = $row['hash_code'];
+				elseif($row['code_type'] === 'file')
+					$obj['hash_file'] = $row['hash_code'];
+			}
+		}
+
 		$l = new layout('editView',$obj);
 	}	
 }

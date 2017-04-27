@@ -18,7 +18,8 @@ public function __construct($view,$obj){
 				$v = new landingView();
 			else if ($view == 'editView')
 				$v = new editView($obj);
-			else $v = new readView();
+			else if($view == 'readView')
+				$v = new readView($obj);
     	?>
 	</html><?php
 	}
