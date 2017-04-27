@@ -3,10 +3,10 @@ namespace hw4\views;
 
 class editView {
 
-	public function __construct($name,$hash){
-		?> : <?=$name?>
+	public function __construct($obj){
+		?> : <?=$obj['name']?>
 		</h1>
-        <link rel="stylesheet" type="text/css" href="../styles/style.css">
+        <link rel="stylesheet" type="text/css" href="src/styles/style.css">
 		</head>
     	<body>
     		Edit Url: <br>
@@ -17,14 +17,12 @@ class editView {
     	</body>
         <script type="text/javascript" src="spreadsheet.js"></script>
         <script>
-            var str = "<? echo $name?>";
-            console.log("<? echo $hash?>");
+            var str = "<? echo $obj['name']?>";
             spreadsheet2 = new Spreadsheet(str,"edit", 
                [[""]], {"mode":"write"}); //editable
             spreadsheet2.draw();
         </script>
 		<?php
-        echo var_dump($_REQUEST);
 	}
 
  

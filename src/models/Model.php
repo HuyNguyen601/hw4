@@ -31,31 +31,41 @@ class Model{
 		$add->close();
 	}
 
-	public function addNote($name, $parent, $date, $content)
+	public function getSheet($name)
 	{
-		$info = new config();
-		$add = new \mysqli($info->host,$info->user,$info->pass,$info->db);
-		if($add->connect_error) {
+		$info = new \hw4\configs\config();
+		$get = new \mysqli($info->host,$info->user,$info->pass,$info->db);
+		if($get->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 			}
-		$query = "INSERT INTO note
-			VALUES ('$name', '$parent','$date','$content');";
-		$add->query($query);
-		echo $add->error;
-		$add->close();
+		$query = "	SELECT sheet_data
+					FROM sheet
+					WHERE sheet_name
+					LIKE '$name';";
+		$result = $get->query($query);
+		echo $get->error;
+		$get->close();
+		return $result;
 	}
 
-	public function getNote($parent)
+	public function getCode($name)
 	{
-		$info = new config();
-		$get= new \mysqli($info->host,$info->user,$info->pass,$info->db);
-		$query = "	SELECT name,time 
-				FROM note 
-				WHERE parent LIKE '$parent'
-				ORDER BY time DESC;";
-		$results = $get->query($query);
+		$info = new \hw4\configs\config();
+		$get = new \mysqli($info->host,$info->user,$info->pass,$info->db);
+		if($get->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+			}
+		$query = "	SELECT sheet_name,code_type 
+					FROM sheet,sheet_codes 
+					WHERE sheet_codes.sheet_id = 
+					(SELECT sheet_id 
+					FROM sheet_codes 
+					WHERE hash_code LIKE '$name')";
+
+		$result = $get->query($query);
+		echo $get->error;
 		$get->close();
-		return $results;
+		return $result;
 	}
 	
 	public function getNoteContent($name)

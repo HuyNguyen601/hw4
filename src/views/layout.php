@@ -8,7 +8,7 @@ use hw4\views\readView;
 
 class layout {
 
-public function __construct($view,$name,$code){
+public function __construct($view,$obj){
 	?>
 	<!DOCTYPE html>
 	<html>
@@ -17,7 +17,7 @@ public function __construct($view,$name,$code){
 			if ($view == 'landingView')
 				$v = new landingView();
 			else if ($view == 'editView')
-				$v = new editView($name,$code);
+				$v = new editView($obj);
 			else $v = new readView();
     	?>
 	</html><?php

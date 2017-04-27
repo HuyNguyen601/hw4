@@ -8,9 +8,9 @@ class landingView {
 		</h1>
 		</head>
     	<body>
-		<form action ="index.php" method ="post">
+		<form method ="post">
 		<input id="name" name="name" type="text" placeholder="New sheet name or code">
-		<input id="go" type="submit" onclick='return check()' value="Go">
+		<input name="go" type="submit" onclick='return check()' value="Go">
 		</form>
 		<script>
 		function check()
@@ -26,6 +26,5 @@ class landingView {
 		</script>
 		</body>
 		<?php
-		//die(var_dump($_POST));
 	}
 }
