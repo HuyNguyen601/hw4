@@ -18,6 +18,7 @@ class editView {
         <script type="text/javascript" src="spreadsheet.js"></script>
         <script>
             var str = "<? echo $name?>";
+            console.log("<? echo $hash?>");
             spreadsheet2 = new Spreadsheet(str,"edit", 
                [[""]], {"mode":"write"}); //editable
             spreadsheet2.draw();

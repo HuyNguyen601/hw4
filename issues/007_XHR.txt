@@ -1,0 +1,2 @@
+Modify spreadsheet.js to pass name value and send it via XHR.
+Get XHR values and try to add to database.

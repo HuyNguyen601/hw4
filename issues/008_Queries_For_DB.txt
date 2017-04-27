@@ -1,0 +1,2 @@
+Write queries to add and update tables in the database
+Develop model to link with database

@@ -2,6 +2,7 @@
 namespace hw4\controllers;
 
 use hw4\views\layout;
+use hw4\models\Model;
 
 class editController {
 
@@ -13,5 +14,7 @@ class editController {
 		$salt = $name + strval($salt);
 		$hash_name = substr(md5($salt),0,8);
 		$l = new layout('editView',$name,$hash_name);
+		$model = new Model();
+		$model->updateCode($name,$hash_name,'edit');
 	}	
 }

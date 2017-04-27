@@ -8,9 +8,9 @@ class landingView {
 		</h1>
 		</head>
     	<body>
-		<form action ="index.php?c=edit" method ="post">
+		<form action ="index.php" method ="post">
 		<input id="name" name="name" type="text" placeholder="New sheet name or code">
-		<input id="go" type="submit" onclick=check() value="Go">
+		<input id="go" type="submit" onclick='return check()' value="Go">
 		</form>
 		<script>
 		function check()
@@ -19,14 +19,13 @@ class landingView {
 			var reg = /^[A-Za-z\d\s]+$/;
 			if (reg.test(name) == false)
 			{
-				alert("Input should contain only spaces and alphanumeric characters!")
-				document.getElementById('name').onsubmit = function() {
-					return false;
-				}
+				alert("Input should contain only spaces and alphanumeric characters!");
+				return false;
 			}
 		}
 		</script>
 		</body>
 		<?php
+		//die(var_dump($_POST));
 	}
 }
