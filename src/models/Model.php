@@ -4,29 +4,31 @@ namespace hw4\models;
 
 class Model{
 
-	public function addSheet($name, $data)
+	public function updateSheet($name, $data)
 	{
-		$info = new hw4\configs\config();
+		$info = new \hw4\configs\config();
 		$add = new \mysqli($info->host,$info->user,$info->pass,$info->db);
 		if($add->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 			}
-		$query = "INSERT INTO sheet (sheet_name,sheet_data) ('$name', '$data');";
-		$add->query($query);
+		$query =$add->query("INSERT INTO sheet (sheet_name,sheet_data) VALUES ('$name', '$data');");
+		if(!$query)
+		{
+			$query= $add->query("UPDATE sheet SET sheet_data='$data' WHERE sheet_name like '$name'");
+		}
 		$add->close();
 	}
 
-	public function getList($parent)
+	public function updateCode($name,$code)
 	{
-		$info = new config();
-		$get= new \mysqli($info->host,$info->user,$info->pass,$info->db);
-		$query = "	SELECT name 
-				FROM list 
-				WHERE parent LIKE '$parent' 
-				ORDER BY name ASC;";
-		$results = $get->query($query);
-		$get->close();
-		return $results;
+		$type = 'edit';
+		$info = new \hw4\configs\config();
+		$add = new \mysqli($info->host,$info->user,$info->pass,$info->db);
+		if($add->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+			}
+		$query =$add->query("INSERT INTO sheet_code VALUES ((SELECT sheet_id FROM sheet WHERE sheet_name LIKE '$name';),$code,$type);");
+		$add->close();
 	}
 
 	public function addNote($name, $parent, $date, $content)

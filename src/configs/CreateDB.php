@@ -16,7 +16,7 @@ $conn->select_db("homework4");
 $sheet= "CREATE TABLE SHEET (
 	sheet_id INT NOT NULL AUTO_INCREMENT,
 	sheet_name VARCHAR(50),
-	sheet_data VARCHAR(50),
+	sheet_data TEXT,
 	PRIMARY KEY(sheet_id)
 	);";
 $code ="CREATE TABLE SHEET_CODES (

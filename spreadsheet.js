@@ -15,12 +15,14 @@
  * @param Array supplied_data two dimensional array of the rows and columns
  *      of data for the spreadsheet
  */
-function Spreadsheet(spreadsheet_id, supplied_data)
+function Spreadsheet(name,spreadsheet_id, supplied_data)
 {
     var self = this;
+    self.name = name;
+    console.log(self);
     var p = Spreadsheet.prototype;
-    var properties = (typeof arguments[2] !== 'undefined') ?
-        arguments[2] : {};
+    var properties = (typeof arguments[3] !== 'undefined') ?
+        arguments[3] : {};
     var container = document.getElementById(spreadsheet_id);
     if (!container) {
         return false;
@@ -261,9 +263,11 @@ function Spreadsheet(spreadsheet_id, supplied_data)
                 data_elt.value = JSON.stringify(data);
                 event.target.innerHTML = new_value;
                 var request = new XMLHttpRequest();
-                request.open("POST","index.php?c=api",true);
+                //var str = "<?php echo $name;?>";
+                var url = "index.php?c=api&name="+self.name;
+                request.open("POST",url,true);
                 request.setRequestHeader("Content-type", "application/json");
-                request.send(data_elt.value);
+                request.send(data);
             }
         } else if (type == 'add' && row == -1 && column >= 0) {
             for (var i = 0; i < length; i++) {

@@ -7,7 +7,7 @@ class landingController {
 
 	public function __construct()
 	{
-		$l = new layout('landingView');
+		$l = new layout('landingView','','');
 		if(isset($_POST['name']))
 		{
 			
