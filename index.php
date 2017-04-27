@@ -12,7 +12,10 @@ if (isset($_REQUEST['c']))
 		$c = new editController();
 	else if($_REQUEST['c'] == 'read')
 		$c = new readController();
-	else if($_REQUEST['c']=='api') $c= new ApiController();
+	else if($_REQUEST['c']=='api') 
+		$c= new ApiController();
+	else if ($_REQUEST['c'] == 'main')
+		$c = new landingController();
 }
 else
 	$c = new landingController();

@@ -38,8 +38,20 @@ class editController {
 		}
 		else if(isset($_GET['name']))
 		{
-			$obj = $_GET;
-			$obj['hash'] ='';
+			$obj['name'] = $_GET['name'];
+			if(isset($_GET['data']))
+				$obj['data'] = $_GET['data'];
+			$model = new Model();
+			$results = $model->getCodes($obj['name']);
+			foreach($results as $row)
+			{
+				if($row['code_type'] === 'edit')
+					$obj['hash_edit'] = $row['hash_code'];
+				elseif($row['code_type'] === 'read')
+					$obj['hash_read'] = $row['hash_code'];
+				elseif($row['code_type'] === 'file')
+					$obj['hash_file'] = $row['hash_code'];
+			}
 		}
 		$l = new layout('editView',$obj);
 	}	

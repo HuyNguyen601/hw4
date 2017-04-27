@@ -88,6 +88,7 @@ class Model{
 		return $result;
 	}
 
+	//get hash code and code type based on name
 	public function getCodes($name)
 	{
 		$info = new \hw4\configs\config();
@@ -95,19 +96,17 @@ class Model{
 		if($get->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 			}
-		$query = "	SELECT sheet_name,code_type 
-					FROM sheet,sheet_codes 
-					WHERE sheet.sheet_id = 
+		$query = "	SELECT hash_code,code_type 
+					FROM sheet_codes 
+					WHERE sheet_codes.sheet_id = 
 						(SELECT sheet_id 
-						FROM sheet_codes 
-						WHERE hash_code LIKE '$name')
-					AND hash_code LIKE '$name';";
+						FROM sheet 
+						WHERE sheet_name LIKE '$name');";
 
 		$result = $get->query($query);
 		echo $get->error;
 		$get->close();
 		return $result;
-
 	}
 
 }
