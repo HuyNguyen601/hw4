@@ -3,6 +3,8 @@ namespace hw4\controllers;
 
 use hw4\views\layout;
 use hw4\models\Model;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class editController {
 
@@ -77,6 +79,13 @@ class editController {
 					$obj['hash_file'] = $row['hash_code'];
 			}
 		}
+
+		// Create the logger
+		$logger = new Logger('my_logger');
+		// Now add some handlers
+		$logger->pushHandler(new StreamHandler(__DIR__.'/../../spread.log', Logger::DEBUG));
+		// You can now use your logger
+		$logger->info('Edit Page was visited.');
 
 		$l = new layout('editView',$obj);
 	}	

@@ -3,11 +3,19 @@ namespace hw4\controllers;
 
 use hw4\views\layout;
 use hw4\models\Model;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class landingController {
 
 	public function __construct()
 	{
+		// Create the logger
+		$logger = new Logger('my_logger');
+		// Now add some handlers
+		$logger->pushHandler(new StreamHandler(__DIR__.'/../../spread.log', Logger::DEBUG));
+		// You can now use your logger
+		$logger->info('Landing Page was visited.');
 		$check = 0;
 		$l = new layout('landingView','');
 		if(isset($_POST['name']))
