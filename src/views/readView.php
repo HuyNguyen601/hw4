@@ -8,7 +8,6 @@ class readView {
 	public function __construct($obj){
 		?> : <?=$obj['name']?>
 		</h1>
-        <link rel="stylesheet" type="text/css" href="src/styles/style.css">
 		</head>
     	<body>
     		File Url:<a href="index.php?c=main&name=<?=$obj['hash_file']?>"> index.php?c=main&name=<?=$obj['hash_file']?></a>  <br>
