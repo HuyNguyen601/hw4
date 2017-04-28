@@ -184,6 +184,49 @@ function Spreadsheet(name,spreadsheet_id, supplied_data)
             out[0] = self.skipWhitespace(cell_expression, sub_out[0]);
             out[1] = - sub_out[1];
             return out;
+        } else if (cell_expression.substring(location,4) =='avg('){
+            var sum = 0;
+            var num;
+            left = cell_expression.substring(location+4,location+6);
+            sign = cell_expression.charAt(location+6);
+            right = cell_expression.substring(location+7,location+9);
+            end = cell_expression.charAt(location+9);
+            var left_num = self.cellNameAsRowColumn(left);
+            var right_num = self.cellNameAsRowColumn(right);
+            if(left_num[0] == right_num[0])
+            {
+                num = right_num[1]-left_num[1]+1;
+                for(var i=left_num[1];i<=right_num[1];i++)
+                {
+                    var cell = self.letterRepresentation(i)+left_num[0].toString();
+                    sum =parseFloat(sum)+ parseFloat(self.evaluateCell(cell,0)[1]);
+                }
+            }
+            else if(left_num[1] == right_num[1])
+            {
+
+                num = right_num[0] - left_num[0] +1;
+                for(var i=left_num[0];i<=right_num[0];i++)
+                {
+                    var cell = self.letterRepresentation(left_num[1])+i.toString();
+                    sum =parseFloat(sum) + parseFloat(self.evaluateCell(cell,0)[1]);
+                }
+            }
+            if( end !=')' || sign != ':' || num < 0 || typeof sum == 'String')
+            {
+                out[0] = location+6;
+                out[1] = "NaN";
+                return out;
+            }
+            else
+            {
+                out[0] = location+6;
+                out[1] = parseFloat(sum)/parseFloat(num);
+                console.log(num);
+                console.log(sum);
+                return out;
+            }
+
         }
         var rest = cell_expression.substring(location);
         var value = rest.match(/^\-?\d+(\.\d*)?|^\-?\.\d+/);
