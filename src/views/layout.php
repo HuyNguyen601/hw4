@@ -20,6 +20,8 @@ public function __construct($view,$obj){
 				$v = new editView($obj);
 			else if($view == 'readView')
 				$v = new readView($obj);
+			else if($view=='fileView')
+				$v = new fileView($obj);
     	?>
 	</html><?php
 	}

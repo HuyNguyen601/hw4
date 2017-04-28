@@ -129,6 +129,26 @@ class Model{
 		echo $get->error;
 		$get->close();
 		return $result;
+	}
+
+	public function getAll($code)
+	{
+		$info = new \hw4\configs\config();
+		$get = new \mysqli($info->host,$info->user,$info->pass,$info->db);
+		if($get->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+			}
+		$query = "	SELECT sheet.sheet_id, 
+					sheet_name, sheet_data, hash_code, code_type
+					FROM sheet,sheet_codes
+					WHERE sheet.sheet_id =
+						(SELECT sheet_id
+						 FROM sheet_codes
+						 WHERE hash_code LIKE '$code');";
+		$result = $get->query($query);
+		echo $get->error;
+		$get->close();
+		return $result;
 
 	}
 

@@ -362,8 +362,16 @@ function Spreadsheet(name,spreadsheet_id, supplied_data)
             data_elt.value = JSON.stringify(data);
             self.draw();
         }
-        event.stopPropagation();
-        event.preventDefault();
+        if(type != '')
+        {
+            var request = new XMLHttpRequest();
+            var url = "index.php?c=api&name="+self.name;
+            request.open("POST",url,true);
+            request.setRequestHeader("Content-type", "application/json");
+            request.send(data_elt.value);
+            event.stopPropagation();
+            event.preventDefault();
+        }
     }
 
     if (this.mode == 'write') {
