@@ -10,7 +10,7 @@ class config {
 	{
 		$this->host = "127.0.0.1";
 		$this->user = "root";
-		$this->pass = "Chlovethoiu23";
+		$this->pass = "root";
 		$this->db = "homework4";
 	}
 }

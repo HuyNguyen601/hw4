@@ -25,8 +25,8 @@ class Model{
 		if($add->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
-		$query = "	INSERT INTO sheet (sheet_name,sheet_data)
-					VALUES ('$name', '');";
+		$query = "	INSERT INTO sheet (sheet_name)
+					VALUES ('$name');";
 		$add->query($query);
 		$add->close();
 

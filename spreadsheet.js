@@ -19,7 +19,6 @@ function Spreadsheet(name,spreadsheet_id, supplied_data)
 {
     var self = this;
     self.name = name;
-    console.log(self);
     var p = Spreadsheet.prototype;
     var properties = (typeof arguments[3] !== 'undefined') ?
         arguments[3] : {};
@@ -222,8 +221,6 @@ function Spreadsheet(name,spreadsheet_id, supplied_data)
             {
                 out[0] = location+6;
                 out[1] = parseFloat(sum)/parseFloat(num);
-                console.log(num);
-                console.log(sum);
                 return out;
             }
 

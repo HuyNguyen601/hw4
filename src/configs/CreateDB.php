@@ -17,6 +17,7 @@ $sheet= "CREATE TABLE SHEET (
 	sheet_id INT NOT NULL AUTO_INCREMENT,
 	sheet_name VARCHAR(50) NOT NULL,
 	sheet_data TEXT,
+	CONSTRAINT AK_sheet_name UNIQUE(sheet_name),
 	PRIMARY KEY(sheet_id)
 	);";
 $code ="CREATE TABLE SHEET_CODES (
