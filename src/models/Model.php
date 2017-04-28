@@ -122,7 +122,7 @@ class Model{
 					WHERE sheet.sheet_id = 
 						(SELECT sheet_id 
 						FROM sheet_codes
-						WHERE hash_code LIKE '$name')
+						WHERE hash_code LIKE '$code')
 					AND code_type = 'file';";
 
 		$result = $get->query($query);

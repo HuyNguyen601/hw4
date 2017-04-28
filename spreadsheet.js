@@ -69,6 +69,7 @@ function Spreadsheet(name,spreadsheet_id, supplied_data)
     {
         //used to draw a csv based on spreadsheet data
         var table = "<div style='" + self.table_style + "'>";
+        var isEditable ="";
         var length = data.length;
         var width = data[0].length;
         var add_button = "";
@@ -80,6 +81,7 @@ function Spreadsheet(name,spreadsheet_id, supplied_data)
                 data)+ "' />";
             add_button = "<button>+</button>";
             pre_delete_button = "<button>-</button>";
+            isEditable = "contenteditable='true'";
         }
         table += "<table border='1' ><tr><th></th>";
         for (var i = 0; i < width; i++) {
@@ -102,12 +104,34 @@ function Spreadsheet(name,spreadsheet_id, supplied_data)
                         item = self.evaluateCell(item.substring(1), 0)[1];
                     }
                 }
-                table += "<td>" + item + "</td>";
+                var id='cell'+i.toString()+j.toString()
+                table += "<td id='"+id+"' "+isEditable+" >" + item + "</td>";
             }
             table += "</tr>";
         }
         table += "</table></div>";
         container.innerHTML = table;
+
+        for(i=0;i<length;i++)
+            for(j=0;j<width;j++)
+            {   
+                var id = 'cell'+i.toString()+j.toString();    
+                document.getElementById(id).onblur= function(){
+                var row = event.target.parentElement.rowIndex - 1;
+                var column = event.target.cellIndex - 1;
+                var new_value = event.target.innerHTML;
+                if (new_value != null) {
+                    data[row][column] = new_value;
+                    data_elt = document.getElementById(self.data_id);
+                    data_elt.value = JSON.stringify(data);
+                    var request = new XMLHttpRequest();
+                    var url = "index.php?c=api&name="+self.name;
+                    request.open("POST",url,true);
+                    request.setRequestHeader("Content-type", "application/json");
+                    request.send(data_elt.value);
+                }
+            }
+        }
     }
     /**
      * Calculates the value of a cell expression in a spreadsheet. Currently,
@@ -246,30 +270,14 @@ function Spreadsheet(name,spreadsheet_id, supplied_data)
      */
     p.updateCell = function (event) {
         var type = (event.target.innerHTML == "+") ? 'add' :
-            (event.target.innerHTML == "-") ? 'delete' :'cell';
+            (event.target.innerHTML == "-") ? 'delete' :'';
         var target = (type == 'cell') ? event.target :
             event.target.parentElement;
         var row = target.parentElement.rowIndex - 1;
         var column = target.cellIndex - 1;
         var length = data.length;
         var width = data[0].length;
-        if (row >= 0 && column >= 0) {
-            var new_value = prompt(self.letterRepresentation(column) +
-                (row + 1), data[row][column]);
-            if (new_value != null) {
-                data[row][column] = new_value;
-                data_elt = document.getElementById(self.data_id);
-                //data_elt.classList.add('highlighted');
-                data_elt.value = JSON.stringify(data);
-                event.target.innerHTML = new_value;
-                var request = new XMLHttpRequest();
-                //var str = "<?php echo $name;?>";
-                var url = "index.php?c=api&name="+self.name;
-                request.open("POST",url,true);
-                request.setRequestHeader("Content-type", "application/json");
-                request.send(data);
-            }
-        } else if (type == 'add' && row == -1 && column >= 0) {
+        if (type == 'add' && row == -1 && column >= 0) {
             for (var i = 0; i < length; i++) {
                 for (var j = width; j > column + 1; j--) {
                     data[i][j] = data[i][j-1];
@@ -314,6 +322,7 @@ function Spreadsheet(name,spreadsheet_id, supplied_data)
         event.stopPropagation();
         event.preventDefault();
     }
+
     if (this.mode == 'write') {
         container.addEventListener("click", self.updateCell, true);
     }

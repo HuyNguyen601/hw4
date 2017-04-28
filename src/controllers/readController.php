@@ -9,18 +9,14 @@ class readController
 	{
 
 		if(isset($_GET['code']))
-			$code = $_GET['code'];
+			$obj['hash_read'] = $_GET['code'];
 		$model = new Model();
-		$result = $model->getNameAndCode($code);
+		$result = $model->readModel($obj['hash_read']);
 		foreach($result as $row)
 		{
 			$obj['name'] = $row['sheet_name'];
-		}
-		$result = $model->getCodes($obj['name']);
-		foreach($result as $row)
-		{
-			if($row['code_type'] === 'file')
-				$obj['hash_file']=$row['hash_code'];
+			$obj['data'] = $row['sheet_data'];
+			$obj['hash_file'] = $row['hash_code'];
 		}
 		$l = new layout('readView',$obj);
 	}

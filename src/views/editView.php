@@ -17,8 +17,8 @@ class editView {
         <script type="text/javascript" src="spreadsheet.js"></script>
         <script>
             var str = "<? echo $obj['name']?>";
-            spreadsheet2 = new Spreadsheet(str,"edit", 
-               [[""]], {"mode":"write"}); //editable
+            var data = <? echo $obj['data']?>;
+            spreadsheet2 = new Spreadsheet(str,"edit", data,{"mode":"write"}); //editable
             spreadsheet2.draw();
         </script>
 		<?php

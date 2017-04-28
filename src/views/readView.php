@@ -17,9 +17,9 @@ class readView {
         <script type="text/javascript" src="spreadsheet.js"></script>
         <script>
             var str = "<? echo $obj['name']?>";
-            var data = "<? echo $obj['data']?>";
-            spreadsheet2 = new Spreadsheet(str,"view", 
-               [[""]], {"mode":"read"}); //editable
+            var data = <? echo $obj['data']?>;
+            console.log(data);
+            spreadsheet2 = new Spreadsheet(str,"view",data);
             spreadsheet2.draw();
         </script>
 		<?php

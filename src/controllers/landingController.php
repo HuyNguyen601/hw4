@@ -23,7 +23,7 @@ class landingController {
 				if(isset($row['sheet_data'])) // check if name is existed name
 				{
 					$data = $row['sheet_data'];
-					$url = "index.php?c=edit&name=$name&data=$data";
+					$url = "index.php?c=edit&name=$name";
 					header("Location: $url");
 					$check = 1; //1 name is existed
 				}
